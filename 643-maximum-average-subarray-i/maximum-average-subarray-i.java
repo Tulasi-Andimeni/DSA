@@ -9,7 +9,7 @@ class Solution {
             sum += nums[i];
             sum -= nums[i-k];
             maxsum = Math.max(maxsum, sum);
-
+            //example
         }
         return (double) maxsum / k;
         
