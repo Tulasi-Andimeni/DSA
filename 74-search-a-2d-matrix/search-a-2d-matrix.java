@@ -10,7 +10,7 @@ class Solution {
             int mid = (low + high) /2;
 
             int row = mid/clos;
-            int clo = mid % clos;
+            int clo = mid % clos; 
 
             int value = matrix[row][clo];
 
