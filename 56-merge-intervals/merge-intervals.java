@@ -1,17 +1,29 @@
 class Solution {
     public int[][] merge(int[][] intervals) {
         
-        Arrays.sort(intervals, (a,b) -> Integer.compare(a[0], b[0]));
-        List<int[]> list = new ArrayList<>();
+         // Step 1: Sort by starting value
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 
-        for(int[] interval : intervals){
-            if(list.isEmpty() || list.get(list.size() - 1)[1] < interval[0]){
-                list.add(interval);
-            }else{
+        List<int[]> result = new ArrayList<>();
 
-                list.get(list.size() -1)[1] = Math.max(list.get(list.size() - 1)[1] , interval[1]);
+        // Step 2: First interval add cheyyali
+        result.add(intervals[0]);
+
+        // Step 3: Remaining intervals check cheyyali
+        for (int i = 1; i < intervals.length; i++) {
+
+            int[] current = intervals[i];
+            int[] last = result.get(result.size() - 1);
+
+            if (current[0] <= last[1]) {
+                // Overlap: update ending value
+                last[1] = Math.max(last[1], current[1]);
+            } else {
+                // No overlap: add new interval
+                result.add(current);
             }
         }
-        return list.toArray(new int[list.size()][]);
+
+        return result.toArray(new int[result.size()][]);
     }
 }
